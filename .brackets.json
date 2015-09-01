@@ -1,0 +1,9 @@
+{
+    "less": [
+        "less/style.less"
+    ],
+    "jscodehints.detectedExclusions": [
+        "C:/development/web/krotnica_pcm/js/vendor/hc/exporting-server/java/highcharts-export/highcharts-export-web/target/highcharts-export-web/resources/js/codemirror-compressed.js",
+        "C:/development/web/krotnica_pcm/js/vendor/hc/exporting-server/java/highcharts-export/highcharts-export-web/target/highcharts-export-web/WEB-INF/jspf/config.js"
+    ]
+}
