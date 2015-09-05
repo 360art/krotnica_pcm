@@ -1,4 +1,4 @@
-var activity = {
+var zegary = {
     "xData": [],
     "datasets": [{
         "name": "Dane",
@@ -14,6 +14,8 @@ var activity = {
         "valueDecimals": 0
         }]
 };
+
+var ilosc_bitow = 32;
 
 $('#container').bind('mousemove touchmove', function (e) {
     var chart,
@@ -55,7 +57,7 @@ function syncExtremes(e) {
 
 function dodajZegarCyfrowy() {
     for (var i = 0; i < 8; i++)
-        activity.datasets.push({
+        zegary.datasets.push({
             "name": "Zegar cyfrowy " + (i + 1) + "/8",
             "data": [],
             "unit": "TTL",
@@ -66,7 +68,7 @@ function dodajZegarCyfrowy() {
 
 function dodajZegarKanalowy() {
     for (var i = 0; i < 32; i++)
-        activity.datasets.push({
+        zegary.datasets.push({
             "name": "Zegar kanałowy " + (i + 1) + "/32",
             "data": [],
             "unit": "TTL",
@@ -75,41 +77,69 @@ function dodajZegarKanalowy() {
         });
 }
 
-function zaladujDane() {
+function zaladujDaneIliniowy() {
     var zero_jeden = true;
-    var ilosc_bitow = 31;
     for (var i = 0; i < ilosc_bitow; i++) {
         zero_jeden = !zero_jeden;
-        activity.xData.push(i);
+        zegary.xData.push(i);
 
-        activity.datasets[0].data.push(Math.round(Math.random())); // Dane
-        activity.datasets[1].data.push(+zero_jeden); // Zegar liniowy
-
-
-        for (var z = 0; z < 8; z++) {
-            if (((i) + 8 - z) % 8 == 0) {
-                activity.datasets[z + 2].data.push(1);
-                activity.datasets[z + 2].data.push(0);
-            } else {
-                activity.datasets[z + 2].data.push(0);
-                activity.datasets[z + 2].data.push(0);
-            }
-        }
-    }
-    for (var z = 0; z < 8; z++) {
-        activity.datasets[z + 2].data.unshift(0);
-        activity.datasets[z + 2].data.pop();
-        activity.datasets[z + 2].data = activity.datasets[z + 2].data.slice(0, ilosc_bitow);
-        console.log(activity.datasets[z + 2].data);
+        zegary.datasets[0].data.push(Math.round(Math.random())); // Dane
+        zegary.datasets[1].data.push(+zero_jeden); // Zegar liniowy
     }
 }
 
+function zaladujZegaryCyfrowe() {
+    for (var i = 0; i < ilosc_bitow; i++) {
+        for (var z = 0; z < 8; z++) {
+            if (((i) + 8 - z) % 8 == 0) {
+                zegary.datasets[z + 2].data.push(1);
+                zegary.datasets[z + 2].data.push(0);
+            } else {
+                zegary.datasets[z + 2].data.push(0);
+                zegary.datasets[z + 2].data.push(0);
+            }
+        }
+    }
+    normalizujDane(8,2);
+}
+
+function normalizujDane(ilosc_zegarow, przesuniecie) {
+    for (var z = 0; z < ilosc_zegarow; z++) {
+        zegary.datasets[z + przesuniecie].data.unshift(0);
+        zegary.datasets[z + przesuniecie].data.pop();
+        zegary.datasets[z + przesuniecie].data = zegary.datasets[z + przesuniecie].data.slice(0, ilosc_bitow);
+    }
+}
+
+function zaladujZegaryKanalowe() {
+    function dodaj8bitow(zegar) {
+        for(var i=0;i<15;i++) {
+            zegary.datasets[zegar + 10].data.push(1);
+        }
+    }
+    function wypelnijDoKoncaZerami(zegar) {
+        var aktualna_pozycja = zegary.datasets[zegar + 10].data.length;
+        for(var i=aktualna_pozycja;i<ilosc_bitow;i++) {
+            zegary.datasets[zegar + 10].data.push(0);
+        }
+    }
+
+    for(var i=0;i<32;i++) {
+        for(z=0;z<(i*16);z++) {
+            zegary.datasets[i + 10].data.push(0);
+        }
+        dodaj8bitow(i);
+        wypelnijDoKoncaZerami(i);
+    }
+    normalizujDane(32,10);
+}
+
 function rysujWykresy() {
-    $.each(activity.datasets, function (i, dataset) {
+    $.each(zegary.datasets, function (i, dataset) {
 
         // Add X values
         dataset.data = Highcharts.map(dataset.data, function (val, i) {
-            return [activity.xData[i], val];
+            return [zegary.xData[i], val];
         });
 
         $('<div class="chart">')
@@ -141,7 +171,8 @@ function rysujWykresy() {
                         setExtremes: syncExtremes
                     },
                     labels: {
-                        format: '{value} t'
+                        step: 1,
+                        format: '{value} t',
                     }
                 },
                 yAxis: {
@@ -181,9 +212,19 @@ function rysujWykresy() {
     });
 }
 
-$(document).ready(function () {
+function dodajZegary() {
     dodajZegarCyfrowy();
     dodajZegarKanalowy();
+}
+
+function zaladujDane() {
+    zaladujDaneIliniowy();
+    zaladujZegaryCyfrowe();
+    zaladujZegaryKanalowe();
+}
+
+$(document).ready(function () {
+    dodajZegary();
     zaladujDane();
     rysujWykresy();
 });
