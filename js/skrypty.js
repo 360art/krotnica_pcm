@@ -113,42 +113,43 @@ function zaladujZegaryCyfrowe() {
             }
         }
     }
-    normalizujDane(8,2);
+    normalizujDane(8, 2);
 }
 
 
 
 function zaladujZegaryKanalowe() {
     function dodaj8bitow(zegar) {
-        for(var i=0;i<15;i++) {
+        for (var i = 0; i < 15; i++) {
             zegary.datasets[zegar + 10].data.push(1);
         }
     }
+
     function wypelnijDoKoncaZerami(zegar) {
         var aktualna_pozycja = zegary.datasets[zegar + 10].data.length;
-        for(var i=aktualna_pozycja;i<ilosc_bitow;i++) {
+        for (var i = aktualna_pozycja; i < ilosc_bitow; i++) {
             zegary.datasets[zegar + 10].data.push(0);
         }
     }
 
-    for(var i=0;i<32;i++) {
-        for(z=0;z<(i*16);z++) {
+    for (var i = 0; i < 32; i++) {
+        for (z = 0; z < (i * 16); z++) {
             zegary.datasets[i + 10].data.push(0);
         }
         dodaj8bitow(i);
         wypelnijDoKoncaZerami(i);
     }
-    normalizujDane(32,10);
+    normalizujDane(32, 10);
 }
 
 function zaladujZegaryRamek() {
     for (var i = 0; i < 511; i++) {
         zegary.datasets[42].data.push(1);
     }
-    for (var i=511;i<ilosc_bitow;i++) {
+    for (var i = 511; i < ilosc_bitow; i++) {
         zegary.datasets[42].data.push(0);
     }
-    normalizujDane(1,42);
+    normalizujDane(1, 42);
 }
 
 function normalizujDane(ilosc_zegarow, przesuniecie) {
