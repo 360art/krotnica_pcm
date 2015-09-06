@@ -15,7 +15,7 @@ var zegary = {
         }]
 };
 
-var ilosc_bitow = 32;
+var ilosc_bitow = 525;
 
 $('#container').bind('mousemove touchmove', function (e) {
     var chart,
@@ -67,7 +67,7 @@ function dodajZegarCyfrowy() {
 }
 
 function dodajZegarKanalowy() {
-    for (var i = 0; i < 32; i++)
+    for (var i = 0; i < 32; i++) {
         zegary.datasets.push({
             "name": "Zegar kanałowy " + (i + 1) + "/32",
             "data": [],
@@ -75,6 +75,19 @@ function dodajZegarKanalowy() {
             "type": "line",
             "valueDecimals": 0
         });
+    }
+}
+
+function dodajZegarRamek() {
+    for (var i = 0; i < 1; i++) {
+        zegary.datasets.push({
+            "name": "Zegar ramek " + (i + 1) + "/16",
+            "data": [],
+            "unit": "TTL",
+            "type": "line",
+            "valueDecimals": 0
+        });
+    }
 }
 
 function zaladujDaneIliniowy() {
@@ -103,13 +116,7 @@ function zaladujZegaryCyfrowe() {
     normalizujDane(8,2);
 }
 
-function normalizujDane(ilosc_zegarow, przesuniecie) {
-    for (var z = 0; z < ilosc_zegarow; z++) {
-        zegary.datasets[z + przesuniecie].data.unshift(0);
-        zegary.datasets[z + przesuniecie].data.pop();
-        zegary.datasets[z + przesuniecie].data = zegary.datasets[z + przesuniecie].data.slice(0, ilosc_bitow);
-    }
-}
+
 
 function zaladujZegaryKanalowe() {
     function dodaj8bitow(zegar) {
@@ -132,6 +139,24 @@ function zaladujZegaryKanalowe() {
         wypelnijDoKoncaZerami(i);
     }
     normalizujDane(32,10);
+}
+
+function zaladujZegaryRamek() {
+    for (var i = 0; i < 511; i++) {
+        zegary.datasets[42].data.push(1);
+    }
+    for (var i=511;i<ilosc_bitow;i++) {
+        zegary.datasets[42].data.push(0);
+    }
+    normalizujDane(1,42);
+}
+
+function normalizujDane(ilosc_zegarow, przesuniecie) {
+    for (var z = 0; z < ilosc_zegarow; z++) {
+        zegary.datasets[z + przesuniecie].data.unshift(0);
+        zegary.datasets[z + przesuniecie].data.pop();
+        zegary.datasets[z + przesuniecie].data = zegary.datasets[z + przesuniecie].data.slice(0, ilosc_bitow);
+    }
 }
 
 function rysujWykresy() {
@@ -167,13 +192,15 @@ function rysujWykresy() {
                 },
                 xAxis: {
                     crosshair: true,
+                    min: 0,
                     events: {
                         setExtremes: syncExtremes
                     },
                     labels: {
                         step: 1,
                         format: '{value} t',
-                    }
+                    },
+                    allowDecimals: false
                 },
                 yAxis: {
                     title: {
@@ -189,7 +216,7 @@ function rysujWykresy() {
                     },
                     borderWidth: 0,
                     backgroundColor: 'none',
-                    pointFormat: '{point.y}',
+                    pointFormat: '{point.x}',
                     headerFormat: '',
                     shadow: false,
                     style: {
@@ -215,12 +242,14 @@ function rysujWykresy() {
 function dodajZegary() {
     dodajZegarCyfrowy();
     dodajZegarKanalowy();
+    dodajZegarRamek();
 }
 
 function zaladujDane() {
     zaladujDaneIliniowy();
     zaladujZegaryCyfrowe();
     zaladujZegaryKanalowe();
+    zaladujZegaryRamek();
 }
 
 $(document).ready(function () {
