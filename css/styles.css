@@ -277,3 +277,25 @@ body {
 .fotorama__dot {
   border-color: #7a3e48 !important;
 }
+.omnie-wrap {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.omnie-wrap .naglowek img {
+  display: inline-block;
+  vertical-align: middle;
+  width: 180px;
+}
+.omnie-wrap .naglowek .naglowek-2 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 740px;
+  margin-left: 20px;
+}
+.omnie-wrap img {
+  display: inline-block;
+  text-align: center;
+}
