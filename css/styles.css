@@ -188,6 +188,8 @@ html {
   font-size: 16px;
   height: 100%;
   width: 100%;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 body {
   position: relative;
@@ -196,19 +198,28 @@ body {
   background-color: #b95835;
 }
 .naglowek-1 {
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
   font-size: 72px;
   text-align: center;
   color: #fff;
   padding-top: 70px;
   margin-bottom: 110px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 .naglowek-2 {
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
   font-size: 48px;
   color: #eecd86;
   margin-top: 25px;
   text-align: center;
+}
+p {
+  font-size: 32px;
+  line-height: 36px;
+  color: #eecd86;
+  margin-bottom: 30px;
+}
+i {
+  font-style: italic;
 }
 #container {
   height: 100%;
@@ -284,18 +295,33 @@ body {
   padding-top: 50px;
   padding-bottom: 50px;
 }
+.omnie-wrap .naglowek {
+  text-align: center;
+  margin-bottom: 40px;
+}
 .omnie-wrap .naglowek img {
   display: inline-block;
   vertical-align: middle;
   width: 180px;
 }
-.omnie-wrap .naglowek .naglowek-2 {
-  display: inline-block;
-  vertical-align: middle;
-  width: 740px;
-  margin-left: 20px;
-}
 .omnie-wrap img {
   display: inline-block;
   text-align: center;
+}
+.tresc img {
+  float: right;
+  max-width: 350px;
+  border: 3px solid #eecd86;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.tresc span {
+  display: block;
+  font-size: 18px;
+  line-height: 19px;
+  padding-left: 15px;
 }
