@@ -256,6 +256,7 @@ i {
   -webkit-box-shadow: 0px 4px 0px 0px #eecd86;
   -moz-box-shadow: 0px 4px 0px 0px #eecd86;
   box-shadow: 0px 4px 0px 0px #eecd86;
+  text-decoration: none;
 }
 .przycisk span {
   position: relative;
@@ -324,4 +325,9 @@ i {
   font-size: 18px;
   line-height: 19px;
   padding-left: 15px;
+}
+hr {
+  color: #7a3e48;
+  border-bottom: 2px solid #7a3e48;
+  margin-bottom: 50px;
 }

@@ -1,2 +1,4 @@
 # Demonstracja działania krotnicy PCM
-## Bartosz Walicki 2015
+Synchronizacja w systemach i sieciach telekomunikacyjnych 
+*dr inż. Michał Kasznia*
+### Bartosz Walicki 2015
