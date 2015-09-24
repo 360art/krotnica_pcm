@@ -172,12 +172,19 @@ function rysujWykresy() {
             .appendTo('#container')
             .highcharts({
                 chart: {
-                    marginLeft: 40, // Keep all charts left aligned
-                    spacingTop: 20,
-                    spacingBottom: 20,
-                    height: 200,
+                    marginLeft: 70, // Keep all charts left aligned
+                    spacingTop: 10,
+                    spacingBottom: 10,
+                    height: 100,
                     // zoomType: 'x',
                     // pinchType: null // Disable zoom on touch devices
+                },
+                plotOptions: {
+                  line: {
+                    marker: {
+                      enabled: false
+                    }
+                  }
                 },
                 title: {
                     text: dataset.name,
@@ -194,12 +201,16 @@ function rysujWykresy() {
                 xAxis: {
                     crosshair: true,
                     min: 0,
+                    tickInterval: 2,
                     events: {
                         setExtremes: syncExtremes
                     },
                     labels: {
                         step: 1,
-                        format: '{value} t',
+                        //format: '{value} t',
+                        formatter: function() {
+                            return this.value/2 + 't';
+                        }
                     },
                     allowDecimals: false
                 },
