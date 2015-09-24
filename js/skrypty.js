@@ -175,7 +175,7 @@ function rysujWykresy() {
                     marginLeft: 70, // Keep all charts left aligned
                     spacingTop: 10,
                     spacingBottom: 10,
-                    height: 100,
+                    height: 85,
                     // zoomType: 'x',
                     // pinchType: null // Disable zoom on touch devices
                 },
@@ -207,7 +207,6 @@ function rysujWykresy() {
                     },
                     labels: {
                         step: 1,
-                        //format: '{value} t',
                         formatter: function() {
                             return this.value/2 + 't';
                         }
@@ -215,6 +214,8 @@ function rysujWykresy() {
                     allowDecimals: false
                 },
                 yAxis: {
+                    min: 0,
+                    max: 1,
                     title: {
                         text: null
                     }
