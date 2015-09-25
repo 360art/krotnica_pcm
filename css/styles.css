@@ -225,6 +225,12 @@ i {
   height: 100%;
   width: 10000px;
   margin: 0 auto;
+  margin-top: 85px;
+}
+[data-highcharts-chart="0"] {
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: 0px 1px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow: 0px 1px 5px 0px rgba(50, 50, 50, 0.75);
 }
 .wrapper {
   width: 100%;
@@ -239,6 +245,38 @@ i {
   display: inline-block;
   max-width: 310px;
   vertical-align: top;
+}
+.przycisk-maly {
+  display: inline-block;
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+  padding: 15px 20px;
+  color: white;
+  -webkit-border-radius: 20%;
+  -moz-border-radius: 20%;
+  border-radius: 20%;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #3d3242;
+  opacity: 0.7;
+  -webkit-box-shadow: 0px 4px 0px 0px #eecd86;
+  -moz-box-shadow: 0px 4px 0px 0px #eecd86;
+  box-shadow: 0px 4px 0px 0px #eecd86;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+}
+.przycisk-maly:hover {
+  -webkit-box-shadow: 0px 4px 0px 0px #e18942;
+  -moz-box-shadow: 0px 4px 0px 0px #e18942;
+  box-shadow: 0px 4px 0px 0px #e18942;
+  opacity: 1;
+}
+.przycisk-maly:active,
+.przycisk-maly:focus {
+  outline: none;
 }
 .przycisk {
   display: inline-block;

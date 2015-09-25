@@ -1,13 +1,13 @@
 var zegary = {
     "xData": [],
-    "datasets": [{
-        "name": "Dane",
+    "datasets": [ {
+        "name": "Zegar liniowy",
         "data": [],
         "unit": "TTL",
         "type": "line",
         "valueDecimals": 0
-        }, {
-        "name": "Zegar liniowy",
+        },{
+        "name": "Dane",
         "data": [],
         "unit": "TTL",
         "type": "line",
@@ -96,8 +96,8 @@ function zaladujDaneIliniowy() {
         zero_jeden = !zero_jeden;
         zegary.xData.push(i);
 
-        zegary.datasets[0].data.push(Math.round(Math.random())); // Dane
-        zegary.datasets[1].data.push(+zero_jeden); // Zegar liniowy
+        zegary.datasets[1].data.push(Math.round(Math.random())); // Dane
+        zegary.datasets[0].data.push(+zero_jeden); // Zegar liniowy
     }
 }
 
@@ -172,7 +172,7 @@ function rysujWykresy() {
             .appendTo('#container')
             .highcharts({
                 chart: {
-                    marginLeft: 70, // Keep all charts left aligned
+                    marginLeft: 40, // Keep all charts left aligned
                     spacingTop: 10,
                     spacingBottom: 10,
                     height: 85,
@@ -190,7 +190,8 @@ function rysujWykresy() {
                     text: dataset.name,
                     align: 'left',
                     margin: 0,
-                    x: 30
+                    x: 30,
+                    style: {"fontSize":"15px"}
                 },
                 credits: {
                     enabled: false
@@ -265,8 +266,15 @@ function zaladujDane() {
     zaladujZegaryRamek();
 }
 
+function ostyluj() {
+    $('.chart').first().css('position','fixed')
+                       .css('top','0')
+                       .css('z-index','999');
+}
+
 $(document).ready(function () {
     dodajZegary();
     zaladujDane();
     rysujWykresy();
+    ostyluj();
 });
